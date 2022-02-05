@@ -38,7 +38,7 @@ class SQLiteLogger(object):
         os.chown(path, wanted_uid, wanted_gid)
 
     def __init__(self, db_path="logs/conpot.db"):
-        self._chown_db(db_path)
+        #self._chown_db(db_path)
         self.conn = sqlite3.connect(db_path)
         self._create_db()
 
