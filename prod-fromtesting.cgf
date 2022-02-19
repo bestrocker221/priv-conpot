@@ -2,8 +2,8 @@
 sensorid = default
 
 [virtual_file_system]
-data_fs_url = /home/lub/202201/tempdir/
-fs_url = tar:///home/lub/202201/data.tar
+data_fs_url = /home/user/project/priv-conpot/tempdir/
+fs_url = tar:///home/user/project/priv-conpot/data.tar
 
 [session]
 timeout = 30
@@ -14,11 +14,11 @@ timeout = 30
 
 [json]
 enabled = True
-filename = /home/lub/202201/logs/conpot.json
+filename = /home/user/project/priv-conpot/logs/conpot.json
 
 [sqlite]
 enabled = True
-sqlite_path = /home/lub/202201/logs/conpot.sqlite
+sqlite_path = /home/user/project/priv-conpot/logs/conpot.sqlite
 
 [syslog]
 enabled = False
