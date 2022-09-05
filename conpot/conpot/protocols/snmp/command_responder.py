@@ -11,6 +11,7 @@ from pysnmp.entity import engine
 from pysnmp.smi.compiler import addMibCompiler
 import gevent
 
+import conpot.core as conpot_core
 from conpot.protocols.snmp import conpot_cmdrsp
 from conpot.protocols.snmp.databus_mediator import DatabusMediator
 from gevent.server import DatagramServer
@@ -21,12 +22,24 @@ logger = logging.getLogger(__name__)
 class SNMPDispatcher(DatagramServer):
     def __init__(self):
         self.__timerResolution = 0.5
+        
+
 
     def registerRecvCbFun(self, recvCbFun, recvId=None):
         self.recvCbFun = recvCbFun
 
     def handle(self, msg, address):
         try:
+            logger.info(f"new con: {self.transportDomain} - {address}")
+            
+            session = conpot_core.get_session(
+                "snmp",
+                address[0],
+                address[1],
+            )
+            session.add_event({"request":str(msg)})
+            logger.info("created session {}, msg: {}".format(session, msg))
+
             self.recvCbFun(self, self.transportDomain, address, msg)
         except Exception as e:
             logger.info("SNMP Exception: %s", e)
